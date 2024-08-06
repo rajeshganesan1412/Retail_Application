@@ -68,6 +68,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>retail-application</finalName>
 	</build>
 
 </project>

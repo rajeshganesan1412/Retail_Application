@@ -39,7 +39,7 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public List<Product> getActiveProducts() {
         List<Product> productList = productRepository.findAll();
-        if(productList != null) {
+        if(!productList.isEmpty()) {
             return productList.stream().filter(product -> product.getStatus().equals(Status.ACTIVE))
                     .sorted(Comparator.comparing(Product::getDatePosted).reversed())
                     .collect(Collectors.collectingAndThen(Collectors.toList(), products -> {
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements IProductService{
     public List<Product> searchProducts(String productName, String minPrice, String maxPrice, String minPostedDate, String maxPostedDate) throws ParseException {
         if(productName != null && !productName.equals("null")) {
             List<Product> productList = productRepository.findByProductName(productName);
-            if(productList.size() != 0) {
+            if(!productList.isEmpty()) {
                 return productList;
             } else {
                 throw new ProductNotFoundException();
